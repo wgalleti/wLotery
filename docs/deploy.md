@@ -1,28 +1,28 @@
 # Deploy
 
-## GitHub Pages
+## GitHub Pages (GitHub Actions)
 
-O projeto esta configurado para deploy em GitHub Pages com base path `/wLotery/`.
+O deploy e automatico via GitHub Actions. A cada push na branch `main`, o workflow `.github/workflows/deploy.yml` executa build e deploy.
 
-### Requisitos
+### Pipeline
 
-- Node.js 18+
-- Repositorio remoto configurado em `git@github.com:wgalleti/wLotery.git`
-
-### Deploy Manual
-
-```bash
-npm run deploy
 ```
-
-Esse comando executa `npm run build` e publica o conteudo de `dist/` na branch `gh-pages` via `gh-pages`.
+push main → build (Node 20, npm ci, vite build) → upload artifact → deploy to Pages
+```
 
 ### O que acontece
 
-1. `vue-tsc -b` — type-check do TypeScript
-2. `vite build` — build de producao com minificacao
-3. `vite-plugin-pwa` — gera Service Worker e manifest
-4. `gh-pages -d dist` — publica na branch `gh-pages`
+1. `npm ci` — instala dependencias com lock exato
+2. `vue-tsc -b` — type-check do TypeScript
+3. `vite build` — build de producao com minificacao
+4. `vite-plugin-pwa` — gera Service Worker e manifest
+5. `actions/upload-pages-artifact` — empacota `dist/`
+6. `actions/deploy-pages` — publica no GitHub Pages
+
+### Configuracao do Repositorio
+
+No GitHub, ir em **Settings > Pages** e configurar:
+- Source: **GitHub Actions**
 
 ### URL
 
@@ -32,11 +32,9 @@ Apos deploy, o app fica disponivel em:
 https://wgalleti.github.io/wLotery/
 ```
 
-### Configuracao do Repositorio
+### Deploy Manual
 
-No GitHub, ir em **Settings > Pages** e configurar:
-- Source: **Deploy from a branch**
-- Branch: **gh-pages** / **/ (root)**
+Tambem e possivel disparar o deploy manualmente via **Actions > Deploy to GitHub Pages > Run workflow**.
 
 ## PWA
 
