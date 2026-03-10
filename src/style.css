@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  /* Background */
+  --color-bg-base: #0a0f0d;
+  --color-bg-surface: #111b16;
+  --color-bg-surface-hover: #1a2b22;
+  --color-bg-surface-alt: #0d1410;
+
+  /* Borders */
+  --color-border-base: #243b2e;
+  --color-border-subtle: #1a2b22;
+
+  /* Primary (green) */
+  --color-primary: #16a34a;
+  --color-primary-light: #22c55e;
+  --color-primary-dark: #15803d;
+  --color-primary-glow: oklch(0.627 0.194 149.57 / 0.12);
+
+  /* Accent */
+  --color-accent: #4ade80;
+  --color-accent-dim: #4ade8040;
+
+  /* Text */
+  --color-text-base: #e5e7eb;
+  --color-text-bright: #f9fafb;
+  --color-text-muted: #6b7280;
+  --color-text-dim: #4b5563;
+
+  /* Semantic */
+  --color-hot: #ef4444;
+  --color-cold: #3b82f6;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+
+  /* Fonts */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Base styles */
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-base);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Font mono utility for lottery numbers */
+.font-lottery {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-base);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-dark);
+}
+
+/* Animations */
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-slide-up {
+  animation: fade-slide-up 0.4s ease-out both;
+}
